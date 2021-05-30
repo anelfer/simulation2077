@@ -3,42 +3,10 @@ package me.anelfer.simulation.actions.spawn;
 import me.anelfer.simulation.entities.object.TreeEntity;
 import me.anelfer.simulation.map.MapSimulation;
 
-import java.util.concurrent.ThreadLocalRandom;
+public class TreeSpawnAction extends AbstractSpawnAction{
 
-public class TreeSpawnAction {
-
-    private final int maxOnMap;
-    private final int X;
-    private final int Y;
-    private final MapSimulation map;
-
-    public TreeSpawnAction(int maxOnMap, int X, int Y, MapSimulation map) {
-        this.maxOnMap = maxOnMap;
-        this.X = X;
-        this.Y = Y;
-        this.map = map;
-    }
-
-    public MapSimulation spawn() {
-
-        int counter = 0;
-
-        for (int y = 0; y < Y; y++) {
-            for (int x = 0; x < X; x++) {
-                if (counter < maxOnMap) {
-                    int randomX = ThreadLocalRandom.current().nextInt(1, X);
-                    int randomY = ThreadLocalRandom.current().nextInt(1, Y);
-
-                    if (map.getMapSimulation(randomX, randomY) == null) {
-                        map.putEntity(new TreeEntity(), randomX, randomY);
-
-                        counter++;
-                    }
-                }
-            }
-        }
-
-        return map;
+    public TreeSpawnAction(int max, MapSimulation map) {
+        super(map, max, new TreeEntity());
     }
 
 }

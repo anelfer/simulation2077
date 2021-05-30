@@ -9,13 +9,6 @@ import me.anelfer.simulation.actions.spawn.EmptySpawnAction;
 import me.anelfer.simulation.actions.spawn.GrassSpawnAction;
 import me.anelfer.simulation.actions.spawn.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.TreeSpawnAction;
-import me.anelfer.simulation.entities.SimulationEntity;
-import me.anelfer.simulation.entities.object.EmptyEntity;
-import me.anelfer.simulation.entities.object.GrassEntity;
-import me.anelfer.simulation.entities.object.RockEntity;
-import me.anelfer.simulation.entities.object.TreeEntity;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class MapFiller {
     private final GridPane gridPane;
@@ -28,11 +21,11 @@ public class MapFiller {
 
     public void mapFiller() {
         Image[][] grid = new Image[Y][X];
-        MapSimulation map = new MapSimulation();
+        MapSimulation map = new MapSimulation(X, Y);
 
-        RockSpawnAction rockAction = new RockSpawnAction(10, 10, 10, map);
-        GrassSpawnAction grassAction = new GrassSpawnAction(25, 10,10, map);
-        TreeSpawnAction treeAction = new TreeSpawnAction(5, 10, 10, map);
+        RockSpawnAction rockAction = new RockSpawnAction(10, map);
+        GrassSpawnAction grassAction = new GrassSpawnAction(15, map);
+        TreeSpawnAction treeAction = new TreeSpawnAction(5, map);
         EmptySpawnAction emptyAction = new EmptySpawnAction(10, 10, map);
 
         rockAction.spawn();
