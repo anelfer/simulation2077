@@ -1,34 +1,38 @@
-me/anelfer/simulation/Controller.java
- me.anelfer.simulation.Controller
-me/anelfer/simulation/map/MapSimulation.java
- me.anelfer.simulation.map.MapSimulation
-me/anelfer/simulation/entities/сreature/AbstractCreature.java
- me.anelfer.simulation.entities.СЃreature.AbstractCreature
-me/anelfer/simulation/map/MapLocation.java
- me.anelfer.simulation.map.MapLocation
-me/anelfer/simulation/entities/SimulationEntity.java
- me.anelfer.simulation.entities.SimulationEntity
-me/anelfer/simulation/actions/spawn/TreeSpawnAction.java
- me.anelfer.simulation.actions.spawn.TreeSpawnAction
-me/anelfer/simulation/actions/spawn/RockSpawnAction.java
- me.anelfer.simulation.actions.spawn.RockSpawnAction
-me/anelfer/simulation/actions/spawn/GrassSpawnAction.java
- me.anelfer.simulation.actions.spawn.GrassSpawnAction
-me/anelfer/simulation/actions/spawn/EmptySpawnAction.java
- me.anelfer.simulation.actions.spawn.EmptySpawnAction
-me/anelfer/simulation/entities/object/EmptyEntity.java
- me.anelfer.simulation.entities.object.EmptyEntity
 me/anelfer/simulation/entities/сreature/PredatorCreature.java
  me.anelfer.simulation.entities.СЃreature.PredatorCreature
 me/anelfer/simulation/entities/object/TreeEntity.java
  me.anelfer.simulation.entities.object.TreeEntity
-me/anelfer/simulation/map/MapFiller.java
- me.anelfer.simulation.map.MapFiller
+me/anelfer/simulation/entities/SimulationEntity.java
+ me.anelfer.simulation.entities.SimulationEntity
+me/anelfer/simulation/actions/spawn/GrassSpawnAction.java
+ me.anelfer.simulation.actions.spawn.GrassSpawnAction
 me/anelfer/simulation/entities/object/GrassEntity.java
  me.anelfer.simulation.entities.object.GrassEntity
+me/anelfer/simulation/map/MapSimulation.java
+ me.anelfer.simulation.map.MapSimulation
+me/anelfer/simulation/actions/spawn/TreeSpawnAction.java
+ me.anelfer.simulation.actions.spawn.TreeSpawnAction
+me/anelfer/simulation/Controller.java
+ me.anelfer.simulation.Controller
+me/anelfer/simulation/actions/AbstractAction.java
+ me.anelfer.simulation.actions.AbstractAction
+me/anelfer/simulation/actions/spawn/EmptySpawnAction.java
+ me.anelfer.simulation.actions.spawn.EmptySpawnAction
+me/anelfer/simulation/entities/object/EmptyEntity.java
+ me.anelfer.simulation.entities.object.EmptyEntity
+me/anelfer/simulation/map/MapLocation.java
+ me.anelfer.simulation.map.MapLocation
+me/anelfer/simulation/entities/сreature/AbstractCreature.java
+ me.anelfer.simulation.entities.СЃreature.AbstractCreature
+me/anelfer/simulation/actions/spawn/RockSpawnAction.java
+ me.anelfer.simulation.actions.spawn.RockSpawnAction
+me/anelfer/simulation/map/Simulation.java
+ me.anelfer.simulation.map.Simulation
 me/anelfer/simulation/entities/object/RockEntity.java
  me.anelfer.simulation.entities.object.RockEntity
 me/anelfer/simulation/Main.java
  me.anelfer.simulation.Main
 me/anelfer/simulation/entities/сreature/herbivoreCreature.java
  me.anelfer.simulation.entities.СЃreature.herbivoreCreature
+me/anelfer/simulation/actions/spawn/AbstractSpawnAction.java
+ me.anelfer.simulation.actions.spawn.AbstractSpawnAction

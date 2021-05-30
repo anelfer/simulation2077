@@ -4,15 +4,15 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import lombok.Getter;
 import me.anelfer.simulation.entities.SimulationEntity;
-import me.anelfer.simulation.map.MapFiller;
+import me.anelfer.simulation.map.Simulation;
 
 public class EmptyEntity extends SimulationEntity {
 
     @Getter
-    private final Image empty = MapFiller.createImage(Color.WHITE);
+    private final Image empty = Simulation.createImage(Color.WHITE);
 
     public EmptyEntity() {
-        super("empty", MapFiller.createImage(Color.WHITE));
+        super("empty", Simulation.createImage(Color.WHITE));
     }
 
 }

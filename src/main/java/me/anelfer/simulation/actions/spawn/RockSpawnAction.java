@@ -4,7 +4,7 @@ import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.entities.object.RockEntity;
 import me.anelfer.simulation.map.MapSimulation;
 
-public class RockSpawnAction extends AbstractSpawnAction{
+public class RockSpawnAction extends AbstractSpawnAction {
 
     public RockSpawnAction(int max, MapSimulation map) {
         super(map, max);

@@ -1,11 +1,12 @@
 package me.anelfer.simulation.actions.spawn;
 
+import me.anelfer.simulation.actions.AbstractAction;
 import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.map.MapSimulation;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class AbstractSpawnAction {
+public abstract class AbstractSpawnAction extends AbstractAction {
 
     private final MapSimulation map;
     private final int max;
@@ -22,22 +23,23 @@ public abstract class AbstractSpawnAction {
 
         int maxOnMap = (int) (((double) max / (X * Y)) * 100);
 
-        for (int y = 0; y < Y; y++) {
-            for (int x = 0; x < X; x++) {
-                if (counter < maxOnMap) {
-                    int randomX = ThreadLocalRandom.current().nextInt(0, X);
-                    int randomY = ThreadLocalRandom.current().nextInt(0, Y);
+        while (counter < maxOnMap) {
+            int randomX = ThreadLocalRandom.current().nextInt(0, X);
+            int randomY = ThreadLocalRandom.current().nextInt(0, Y);
 
-                    if (map.getMapSimulation(randomX, randomY) == null) {
-                        map.putEntity(createEntity(), randomX, randomY);
+            if (map.getMapSimulation(randomX, randomY) == null) {
+                map.putEntity(createEntity(), randomX, randomY);
 
-                        counter++;
-                    }
-                }
+                counter++;
             }
         }
 
         return map;
+    }
+
+    @Override
+    public void perform() {
+        spawn();
     }
 
     public abstract SimulationEntity createEntity();

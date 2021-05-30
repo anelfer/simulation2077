@@ -10,12 +10,12 @@ import me.anelfer.simulation.actions.spawn.GrassSpawnAction;
 import me.anelfer.simulation.actions.spawn.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.TreeSpawnAction;
 
-public class MapFiller {
+public class Simulation {
     private final GridPane gridPane;
     private final int Y = 10;
     private final int X = 10;
 
-    public MapFiller(GridPane gridPane) {
+    public Simulation(GridPane gridPane) {
         this.gridPane = gridPane;
     }
 
@@ -28,9 +28,9 @@ public class MapFiller {
         TreeSpawnAction treeAction = new TreeSpawnAction(5, map);
         EmptySpawnAction emptyAction = new EmptySpawnAction(10, 10, map);
 
-        rockAction.spawn();
-        grassAction.spawn();
-        treeAction.spawn();
+        rockAction.perform();
+        grassAction.perform();
+        treeAction.perform();
         emptyAction.spawn();
 
         for (MapLocation key : map.keySet()) {

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
 import me.anelfer.simulation.entities.SimulationEntity;
+import me.anelfer.simulation.map.MapSimulation;
 
 
 public abstract class AbstractCreature extends SimulationEntity {
@@ -23,5 +24,7 @@ public abstract class AbstractCreature extends SimulationEntity {
         this.health = health;
         this.gender = gender;
     }
+
+    public abstract void makeMove(MapSimulation map);
 
 }

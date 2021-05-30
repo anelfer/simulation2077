@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import me.anelfer.simulation.map.MapFiller;
+import me.anelfer.simulation.map.Simulation;
 
 public class Main extends Application {
 
@@ -18,7 +18,7 @@ public class Main extends Application {
         gridPane.setVgap(2);
         gridPane.setStyle("-fx-background-color: #9280b8;");
 
-        new MapFiller(gridPane).mapFiller();
+        new Simulation(gridPane).mapFiller();
 
         Scene scene = new Scene(gridPane);
         primaryStage.setTitle("Simulation");
