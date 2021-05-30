@@ -9,12 +9,10 @@ public abstract class AbstractSpawnAction {
 
     private final MapSimulation map;
     private final int max;
-    private final SimulationEntity entity;
 
-    public AbstractSpawnAction(MapSimulation map, int max, SimulationEntity entity) {
+    public AbstractSpawnAction(MapSimulation map, int max) {
         this.map = map;
         this.max = max;
-        this.entity = entity;
     }
 
     public MapSimulation spawn() {
@@ -30,15 +28,18 @@ public abstract class AbstractSpawnAction {
                     int randomX = ThreadLocalRandom.current().nextInt(0, X);
                     int randomY = ThreadLocalRandom.current().nextInt(0, Y);
 
-                    map.putEntity(entity, randomX, randomY);
+                    if (map.getMapSimulation(randomX, randomY) == null) {
+                        map.putEntity(createEntity(), randomX, randomY);
 
-                    counter++;
-
+                        counter++;
+                    }
                 }
             }
         }
 
         return map;
     }
+
+    public abstract SimulationEntity createEntity();
 
 }
