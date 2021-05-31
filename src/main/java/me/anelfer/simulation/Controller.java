@@ -1,4 +1,3 @@
 package me.anelfer.simulation;
 
-public class Controller {
-}
+public class Controller { }

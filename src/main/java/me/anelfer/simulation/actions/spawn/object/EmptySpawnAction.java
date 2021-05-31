@@ -1,4 +1,4 @@
-package me.anelfer.simulation.actions.spawn;
+package me.anelfer.simulation.actions.spawn.object;
 
 import me.anelfer.simulation.entities.object.EmptyEntity;
 import me.anelfer.simulation.map.MapSimulation;

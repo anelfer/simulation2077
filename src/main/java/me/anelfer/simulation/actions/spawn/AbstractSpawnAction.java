@@ -11,9 +11,9 @@ public abstract class AbstractSpawnAction extends AbstractAction {
     private final MapSimulation map;
     private final int max;
 
-    public AbstractSpawnAction(MapSimulation map, int max) {
-        this.map = map;
+    public AbstractSpawnAction(int max, MapSimulation map) {
         this.max = max;
+        this.map = map;
     }
 
     public MapSimulation spawn() {

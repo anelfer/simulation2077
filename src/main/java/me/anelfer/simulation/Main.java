@@ -18,7 +18,8 @@ public class Main extends Application {
         gridPane.setVgap(2);
         gridPane.setStyle("-fx-background-color: #9280b8;");
 
-        new Simulation(gridPane).mapFiller();
+        Simulation simulation = new Simulation(gridPane);
+        simulation.mapFiller();
 
         Scene scene = new Scene(gridPane);
         primaryStage.setTitle("Simulation");
