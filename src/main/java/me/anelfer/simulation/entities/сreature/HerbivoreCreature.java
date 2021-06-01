@@ -11,7 +11,7 @@ public class HerbivoreCreature extends AbstractCreature {
     private String gender = "male";
 
     public HerbivoreCreature(int speed, int health, String gender) {
-        super("herbivore", Simulation.createImage(Color.PURPLE), speed, health, gender);
+        super("herbivore", speed, health, gender);
     }
 
     @Override

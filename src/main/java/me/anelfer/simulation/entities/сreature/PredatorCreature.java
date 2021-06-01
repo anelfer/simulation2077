@@ -1,17 +1,18 @@
 package me.anelfer.simulation.entities.сreature;
 
-import javafx.scene.paint.Color;
 import me.anelfer.simulation.map.MapSimulation;
-import me.anelfer.simulation.map.Simulation;
 
 public class PredatorCreature extends AbstractCreature {
 
-    private int speed = 2;
-    private int health = 25;
-    private String gender = "female";
+    private final int speed;
+    private final int health;
+    private final String gender;
 
     public PredatorCreature(int speed, int health, String gender) {
-        super("predator", Simulation.createImage(Color.RED), speed, health, gender);
+        super("predator", speed, health, gender);
+        this.speed = speed;
+        this.health = health;
+        this.gender = gender;
     }
 
     @Override

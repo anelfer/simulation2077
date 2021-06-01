@@ -9,9 +9,9 @@ public class MapLocation {
     private final int row;
     private final int column;
 
-    public MapLocation(int row, int column) {
-        this.row = row;
-        this.column = column;
+    public MapLocation(int X, int Y) {
+        this.column = X;
+        this.row = Y;
     }
 
     @Override

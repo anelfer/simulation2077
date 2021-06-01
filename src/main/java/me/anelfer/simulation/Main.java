@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import javafx.util.Duration;
-import me.anelfer.simulation.map.Simulation;
+import me.anelfer.simulation.render.Renderer;
 
 public class Main extends Application {
 
@@ -18,26 +18,26 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         GridPane gridPane = new GridPane();
 
-        // for visualizing the different squares:
         gridPane.setHgap(2);
         gridPane.setVgap(2);
         gridPane.setStyle("-fx-background-color: #9280b8;");
 
-        primaryStage.setScene(new Scene(gridPane));
-        primaryStage.setTitle("Simulation");
+        primaryStage.setTitle("Simulation 2077");
         primaryStage.setMinWidth(340);
         primaryStage.setMinHeight(360);
+
+        primaryStage.setScene(new Scene(gridPane, 400, 400));
         primaryStage.show();
 
         ScheduledService<Image[][]> svc = new ScheduledService<>() {
-            Simulation simulation = new Simulation();
+            final Renderer renderer = new Renderer();
 
             @Override
             protected Task<Image[][]> createTask() {
                 return new Task<>() {
                     @Override
                     protected Image[][] call() {
-                        return simulation.mapFiller();
+                        return renderer.render();
                     }
                 };
             }

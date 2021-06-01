@@ -21,8 +21,8 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
         this.put(new MapLocation(row, column), entity);
     }
 
-    public SimulationEntity getMapSimulation(int row, int column) {
-        return this.get(new MapLocation(row, column));
+    public SimulationEntity getMapSimulation(int X, int Y) {
+        return this.get(new MapLocation(X, Y));
     }
 
 }

@@ -18,8 +18,8 @@ public abstract class AbstractCreature extends SimulationEntity {
     @Getter
     private final String gender;
 
-    public AbstractCreature(String name, Image image, int speed, int health, String gender) {
-        super(name, image);
+    public AbstractCreature(String name, int speed, int health, String gender) {
+        super(name);
         this.speed = speed;
         this.health = health;
         this.gender = gender;
