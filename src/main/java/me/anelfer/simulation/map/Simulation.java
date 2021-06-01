@@ -1,12 +1,9 @@
 package me.anelfer.simulation.map;
 
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import me.anelfer.simulation.actions.spawn.creature.HerbivoreSpawnAction;
 import me.anelfer.simulation.actions.spawn.creature.PredatorSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.EmptySpawnAction;
@@ -15,17 +12,11 @@ import me.anelfer.simulation.actions.spawn.object.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.TreeSpawnAction;
 
 public class Simulation {
-    private final GridPane gridPane;
     private final int Y = 10;
     private final int X = 10;
-    private final MapSimulation map = new MapSimulation(X, Y);
+    public final MapSimulation map = new MapSimulation(X, Y);
 
-
-    public Simulation(GridPane gridPane) {
-        this.gridPane = gridPane;
-    }
-
-    public void mapFiller() {
+    public Image[][] mapFiller() {
         Image[][] grid = new Image[Y][X];
 
         RockSpawnAction rockAction = new RockSpawnAction(10, map);
@@ -51,16 +42,7 @@ public class Simulation {
             grid[y][x] = map.get(key).getImage();
         }
 
-        for (int y = 0 ; y < grid.length ; y++) {
-            for (int x = 0 ; x < grid[y].length ; x++) {
-                ImageView imageView = new ImageView(grid[y][x]);
-                int tileSize = 30;
-                imageView.setFitWidth(tileSize);
-                imageView.setFitHeight(tileSize);
-                gridPane.add(imageView, x, y);
-            }
-        }
-
+        return grid;
     }
 
     public static Image createImage(Color color) {
@@ -68,6 +50,5 @@ public class Simulation {
         image.getPixelWriter().setColor(0, 0, color);
         return image ;
     }
-
 
 }
