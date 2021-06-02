@@ -7,35 +7,35 @@ import me.anelfer.simulation.map.Simulation;
 
 public class Renderer {
 
-    public Simulation simulation = new Simulation();
+    private final Simulation simulation = new Simulation();
 
     public Renderer() {
         simulation.start();
     }
 
-    public Image[][] render() {
-        Image[][] grid = new Image[simulation.Y][simulation.X];
+    public Color[][] render() {
+        Color[][] grid = new Color[simulation.X][simulation.Y];
 
         for (int y = 0; y < simulation.Y; y++) {
             for (int x = 0; x < simulation.X; x++) {
                 if (!simulation.map.containsKey(new MapLocation(x, y))) {
-                    grid[y][x] = Simulation.createImage(Color.WHITE);
+                    grid[y][x] = Color.WHITE;
                 } else {
                     switch (simulation.map.getMapSimulation(x, y).getName()) {
                         case "grass":
-                            grid[y][x] = Simulation.createImage(Color.GREEN);
+                            grid[y][x] = Color.GREEN;
                             break;
                         case "rock":
-                            grid[y][x] = Simulation.createImage(Color.GREY);
+                            grid[y][x] = Color.GREY;
                             break;
                         case "tree":
-                            grid[y][x] = Simulation.createImage(Color.web("#964B00"));
+                            grid[y][x] = Color.web("#964B00");
                             break;
                         case "herbivore":
-                            grid[y][x] = Simulation.createImage(Color.PURPLE);
+                            grid[y][x] = Color.PURPLE;
                             break;
                         case "predator":
-                            grid[y][x] = Simulation.createImage(Color.RED);
+                            grid[y][x] = Color.RED;
                             break;
                     }
                 }

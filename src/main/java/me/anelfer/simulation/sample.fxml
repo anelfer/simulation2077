@@ -1,3 +1,0 @@
-<GridPane fx:controller="me.anelfer.simulation.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>

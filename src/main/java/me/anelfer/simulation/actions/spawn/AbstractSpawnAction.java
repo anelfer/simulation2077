@@ -16,12 +16,12 @@ public abstract class AbstractSpawnAction extends AbstractAction {
         this.map = map;
     }
 
-    public MapSimulation spawn() {
+    private MapSimulation spawn() {
         int Y = map.getY();
         int X = map.getX();
         int counter = 0;
 
-        int maxOnMap = (int) (((double) max / (X * Y)) * 100);
+        int maxOnMap = (int) (((double) max * (X * Y)) / 100);
 
         while (counter < maxOnMap) {
             int randomX = ThreadLocalRandom.current().nextInt(0, X);
@@ -29,7 +29,6 @@ public abstract class AbstractSpawnAction extends AbstractAction {
 
             if (map.getMapSimulation(randomX, randomY) == null) {
                 map.putEntity(createEntity(), randomX, randomY);
-
                 counter++;
             }
         }
