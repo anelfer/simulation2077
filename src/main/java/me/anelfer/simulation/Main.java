@@ -25,8 +25,8 @@ public class Main extends Application {
     public Main() {
         Simulation simulation = new Simulation();
         this.size = (int) ((((float) simulation.X / (simulation.Y * simulation.X))) * 500);
-        this.canvasWidth = size * simulation.X + ((simulation.X * (size/2)) + (size * 2));
-        this.canvasHeight = size * simulation.Y + ((simulation.Y * (size/2)) + (size * 2));
+        this.canvasWidth = size * simulation.X + ((simulation.X * (size / 2)) + (size * 2));
+        this.canvasHeight = size * simulation.Y + ((simulation.Y * (size / 2)) + (size * 2));
     }
 
     @Override
@@ -68,17 +68,16 @@ public class Main extends Application {
         svc.setOnSucceeded(event -> {
             Color[][] grid = (Color[][]) event.getSource().getValue();
             int spacingY = 0;
-            for (int y = 0 ; y < grid.length ; y++) {
+            for (int y = 0; y < grid.length; y++) {
                 int spacingX = 0;
-                for (int x = 0 ; x < grid[y].length ; x++) {
+                for (int x = 0; x < grid[y].length; x++) {
                     gc.setFill(grid[y][x]);
-                    gc.fillRect((x + 1) * size + spacingX , (y + 1) * size + spacingY, size, size);
+                    gc.fillRect((x + 1) * size + spacingX, (y + 1) * size + spacingY, size, size);
                     spacingX += size / 2;
                 }
                 spacingY += size / 2;
             }
         });
-
     }
 
     public static void main(String[] args) {

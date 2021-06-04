@@ -1,6 +1,5 @@
 package me.anelfer.simulation.render;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.Simulation;
@@ -9,11 +8,9 @@ public class Renderer {
 
     private final Simulation simulation = new Simulation();
 
-    public Renderer() {
-        simulation.start();
-    }
-
     public Color[][] render() {
+        simulation.start();
+
         Color[][] grid = new Color[simulation.X][simulation.Y];
 
         for (int y = 0; y < simulation.Y; y++) {
@@ -21,7 +18,7 @@ public class Renderer {
                 if (!simulation.map.containsKey(new MapLocation(x, y))) {
                     grid[y][x] = Color.WHITE;
                 } else {
-                    switch (simulation.map.getMapSimulation(x, y).getName()) {
+                    switch (simulation.map.getSimulationEntity(x, y).getName()) {
                         case "grass":
                             grid[y][x] = Color.GREEN;
                             break;
@@ -41,7 +38,6 @@ public class Renderer {
                 }
             }
         }
-
         return grid;
     }
 

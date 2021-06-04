@@ -1,9 +1,7 @@
 package me.anelfer.simulation.map;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import me.anelfer.simulation.actions.AbstractAction;
+import me.anelfer.simulation.actions.move.PredatorMoveAction;
 import me.anelfer.simulation.actions.spawn.creature.HerbivoreSpawnAction;
 import me.anelfer.simulation.actions.spawn.creature.PredatorSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.GrassSpawnAction;
@@ -13,6 +11,7 @@ import me.anelfer.simulation.actions.spawn.object.TreeSpawnAction;
 import java.util.ArrayList;
 
 public class Simulation {
+
     public final int Y = 25;
     public final int X = 25;
     public final MapSimulation map = new MapSimulation(X, Y);
@@ -26,6 +25,8 @@ public class Simulation {
 
         actions.add(new PredatorSpawnAction(2, map));
         actions.add(new HerbivoreSpawnAction(2, map));
+
+//        actions.add(new PredatorMoveAction(map));
     }
 
     public void start() {

@@ -1,11 +1,17 @@
 package me.anelfer.simulation.entities.object;
 
 import me.anelfer.simulation.entities.SimulationEntity;
+import me.anelfer.simulation.map.MapLocation;
 
 public class RockEntity extends SimulationEntity {
 
-    public RockEntity() {
-        super("rock");
+    public RockEntity(MapLocation location) {
+        super("rock", location);
+    }
+
+    @Override
+    public Class<?> getType() {
+        return this.getClass();
     }
 
 }

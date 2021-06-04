@@ -3,6 +3,7 @@ package me.anelfer.simulation.actions.spawn.creature;
 import me.anelfer.simulation.actions.spawn.AbstractSpawnAction;
 import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.entities.сreature.PredatorCreature;
+import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 
 public class PredatorSpawnAction extends AbstractSpawnAction {
@@ -12,8 +13,13 @@ public class PredatorSpawnAction extends AbstractSpawnAction {
     }
 
     @Override
-    public SimulationEntity createEntity() {
-        return new PredatorCreature(2, 30, "female");
+    public SimulationEntity createEntity(MapLocation location) {
+        return new PredatorCreature(2, 30, "female", location);
+    }
+
+    @Override
+    public Class<?> getEntityClass() {
+        return PredatorCreature.class;
     }
 
 }
