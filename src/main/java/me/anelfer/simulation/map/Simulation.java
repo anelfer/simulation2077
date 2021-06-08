@@ -1,6 +1,8 @@
 package me.anelfer.simulation.map;
 
+import lombok.Getter;
 import me.anelfer.simulation.actions.AbstractAction;
+import me.anelfer.simulation.actions.move.HerbivoreMoveAction;
 import me.anelfer.simulation.actions.move.PredatorMoveAction;
 import me.anelfer.simulation.actions.spawn.creature.HerbivoreSpawnAction;
 import me.anelfer.simulation.actions.spawn.creature.PredatorSpawnAction;
@@ -12,11 +14,14 @@ import java.util.ArrayList;
 
 public class Simulation {
 
-    public final int Y = 25;
-    public final int X = 25;
+    @Getter
+    public static final int Y = 25;
+    @Getter
+    public static final int X = 25;
     public final MapSimulation map = new MapSimulation(X, Y);
     private final ArrayList<AbstractAction> actions = new ArrayList<>();
-    private int counter = 1;
+    @Getter
+    private static int counter = 1;
 
     public Simulation() {
         actions.add(new RockSpawnAction(10, map));
@@ -26,14 +31,15 @@ public class Simulation {
         actions.add(new PredatorSpawnAction(2, map));
         actions.add(new HerbivoreSpawnAction(2, map));
 
-//        actions.add(new PredatorMoveAction(map));
+        actions.add(new PredatorMoveAction(map));
+        actions.add(new HerbivoreMoveAction(map));
     }
 
     public void start() {
         for (AbstractAction action : actions) {
             action.perform();
-            counter++;
         }
+        counter++;
     }
 
 }

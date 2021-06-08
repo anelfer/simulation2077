@@ -11,10 +11,10 @@ public class Renderer {
     public Color[][] render() {
         simulation.start();
 
-        Color[][] grid = new Color[simulation.X][simulation.Y];
+        Color[][] grid = new Color[Simulation.X][Simulation.Y];
 
-        for (int y = 0; y < simulation.Y; y++) {
-            for (int x = 0; x < simulation.X; x++) {
+        for (int y = 0; y < Simulation.Y; y++) {
+            for (int x = 0; x < Simulation.X; x++) {
                 if (!simulation.map.containsKey(new MapLocation(x, y))) {
                     grid[y][x] = Color.WHITE;
                 } else {

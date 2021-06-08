@@ -16,6 +16,8 @@ import javafx.util.Duration;
 import me.anelfer.simulation.map.Simulation;
 import me.anelfer.simulation.render.Renderer;
 
+import java.util.Arrays;
+
 public class Main extends Application {
 
     private final int size;
@@ -23,10 +25,9 @@ public class Main extends Application {
     private final int canvasHeight;
 
     public Main() {
-        Simulation simulation = new Simulation();
-        this.size = (int) ((((float) simulation.X / (simulation.Y * simulation.X))) * 500);
-        this.canvasWidth = size * simulation.X + ((simulation.X * (size / 2)) + (size * 2));
-        this.canvasHeight = size * simulation.Y + ((simulation.Y * (size / 2)) + (size * 2));
+        this.size = (int) ((((float) Simulation.X / (Simulation.Y * Simulation.X))) * 500);
+        this.canvasWidth = size * Simulation.X + ((Simulation.X * (size / 2)) + (size * 2));
+        this.canvasHeight = size * Simulation.Y + ((Simulation.Y * (size / 2)) + (size * 2));
     }
 
     @Override
@@ -68,6 +69,7 @@ public class Main extends Application {
         svc.setOnSucceeded(event -> {
             Color[][] grid = (Color[][]) event.getSource().getValue();
             int spacingY = 0;
+
             for (int y = 0; y < grid.length; y++) {
                 int spacingX = 0;
                 for (int x = 0; x < grid[y].length; x++) {

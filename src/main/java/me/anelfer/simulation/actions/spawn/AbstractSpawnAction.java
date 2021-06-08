@@ -36,7 +36,7 @@ public abstract class AbstractSpawnAction extends AbstractAction {
         int randomY = ThreadLocalRandom.current().nextInt(0, Y);
 
         if (map.getSimulationEntity(randomX, randomY) == null) {
-            map.putEntity(createEntity(new MapLocation(randomX, randomY)), randomX, randomY);
+            map.putEntity(randomX, randomY, createEntity(new MapLocation(randomX, randomY)));
         }
     }
 

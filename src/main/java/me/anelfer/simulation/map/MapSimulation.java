@@ -19,7 +19,7 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
         this.Y = Y;
     }
 
-    public void putEntity(SimulationEntity entity, int X, int Y) {
+    public void putEntity(int X, int Y, SimulationEntity entity) {
         if (entityCount.containsKey(entity.getType())) {
             int counter = entityCount.get(entity.getType()) + 1;
             entityCount.put(entity.getType(), counter);
@@ -30,8 +30,19 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
         this.put(new MapLocation(X, Y), entity);
     }
 
+    @Override
+    public SimulationEntity remove(Object key) {
+        int count = entityCount.get(this.getSimulationEntity((MapLocation) key).getType()) - 1;
+        entityCount.put(this.getSimulationEntity((MapLocation) key).getType(), count);
+        return super.remove(key);
+    }
+
     public SimulationEntity getSimulationEntity(int X, int Y) {
         return this.get(new MapLocation(X, Y));
+    }
+
+    public SimulationEntity getSimulationEntity(MapLocation location) {
+        return this.get(location);
     }
 
     public int getEntityCount(Class<?> entityClass) {
