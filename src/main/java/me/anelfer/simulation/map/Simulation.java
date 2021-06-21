@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class Simulation {
 
     @Getter
-    public static final int Y = 15;
+    public static final int Y = 35;
     @Getter
-    public static final int X = 15;
+    public static final int X = 35;
     public final MapSimulation map = new MapSimulation(X, Y);
     private final ArrayList<AbstractAction> actions = new ArrayList<>();
     @Getter
@@ -43,6 +43,7 @@ public class Simulation {
             action.perform();
         }
         counter++;
+        System.out.println("Step: " + counter);
     }
 
 }

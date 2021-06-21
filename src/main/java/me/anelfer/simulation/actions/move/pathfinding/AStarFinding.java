@@ -88,13 +88,13 @@ public class AStarFinding {
         }
 
         Collections.reverse(path);
-        path.remove(0);
 
-        if (path.size() >= (entity.getSpeed())) {
-            return path.get(entity.getSpeed() - 1);
+        if (path.size()-1 >= (entity.getSpeed())) {
+            return path.get(entity.getSpeed());
         } else {
             return path.get(0);
         }
+
     }
 
     private Boolean checkNextNode(int x, int y) {
