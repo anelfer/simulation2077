@@ -2,6 +2,7 @@ package me.anelfer.simulation.actions.spawn;
 
 import me.anelfer.simulation.actions.AbstractAction;
 import me.anelfer.simulation.entities.SimulationEntity;
+import me.anelfer.simulation.entities.object.EmptyEntity;
 import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 
@@ -35,7 +36,11 @@ public abstract class AbstractSpawnAction extends AbstractAction {
         int randomX = ThreadLocalRandom.current().nextInt(0, X);
         int randomY = ThreadLocalRandom.current().nextInt(0, Y);
 
-        if (map.getSimulationEntity(randomX, randomY) == null) {
+        if (map.getSimulationEntity(randomX, randomY) == null || map.getSimulationEntity(randomX, randomY).getType() == EmptyEntity.class) {
+            if (!map.isCellEmpty(randomX, randomY)) {
+                map.remove(new MapLocation(randomX, randomY));
+            }
+
             map.putEntity(randomX, randomY, createEntity(new MapLocation(randomX, randomY)));
         }
     }

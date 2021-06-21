@@ -14,7 +14,7 @@ public class PredatorSpawnAction extends AbstractSpawnAction {
 
     @Override
     public SimulationEntity createEntity(MapLocation location) {
-        return new PredatorCreature(2, 30, "female", location);
+        return new PredatorCreature(1, 30, "female", location);
     }
 
     @Override
