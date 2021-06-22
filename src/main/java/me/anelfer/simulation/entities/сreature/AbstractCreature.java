@@ -9,9 +9,11 @@ import java.util.List;
 
 public abstract class AbstractCreature extends SimulationEntity {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int speed;
-    @Getter @Setter
+    @Getter
+    @Setter
     private int health;
 
     @Getter

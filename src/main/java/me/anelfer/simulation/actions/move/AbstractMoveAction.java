@@ -22,7 +22,7 @@ public abstract class AbstractMoveAction extends AbstractAction {
     }
 
     public void move() {
-        if(Simulation.getCounter() < 2) {
+        if (Simulation.getCounter() < 2) {
             return;
         }
 

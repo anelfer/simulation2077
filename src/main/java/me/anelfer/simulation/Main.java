@@ -9,14 +9,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javafx.util.Duration;
 import me.anelfer.simulation.map.Simulation;
 import me.anelfer.simulation.render.Renderer;
-
-import java.util.Arrays;
 
 public class Main extends Application {
 

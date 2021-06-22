@@ -4,7 +4,6 @@ import javafx.util.Pair;
 import lombok.val;
 import me.anelfer.simulation.entities.object.EmptyEntity;
 import me.anelfer.simulation.entities.сreature.AbstractCreature;
-import me.anelfer.simulation.entities.сreature.HerbivoreCreature;
 import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 
@@ -89,7 +88,7 @@ public class AStarFinding {
 
         Collections.reverse(path);
 
-        if (path.size()-1 >= (entity.getSpeed())) {
+        if (path.size() - 1 >= (entity.getSpeed())) {
             return path.get(entity.getSpeed());
         } else {
             return path.get(0);
@@ -98,7 +97,7 @@ public class AStarFinding {
     }
 
     private Boolean checkNextNode(int x, int y) {
-        if ( 0 <= x && x < map.getX() && 0 <= y && y < map.getY()) {
+        if (0 <= x && x < map.getX() && 0 <= y && y < map.getY()) {
             return entity.getPreys().contains(map.getSimulationEntity(x, y).getType()) || map.getSimulationEntity(x, y).getType() == EmptyEntity.class;
         } else {
             return false;
