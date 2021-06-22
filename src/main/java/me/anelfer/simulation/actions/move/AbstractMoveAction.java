@@ -5,6 +5,7 @@ import me.anelfer.simulation.actions.move.pathfinding.AStarFinding;
 import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.entities.object.EmptyEntity;
 import me.anelfer.simulation.entities.сreature.AbstractCreature;
+import me.anelfer.simulation.entities.сreature.HerbivoreCreature;
 import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 import me.anelfer.simulation.map.Simulation;
@@ -43,6 +44,10 @@ public abstract class AbstractMoveAction extends AbstractAction {
             }
 
             map.remove(location);
+
+            /*if (simulationEntity.getType() == HerbivoreCreature.class) {
+                System.out.println("COUNT: " + map.getEntityCount(HerbivoreCreature.class));
+            }*/
 
             simulationEntity.setLocation(aStarLoc);
             map.putEntity(aStarLoc, simulationEntity);
