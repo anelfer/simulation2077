@@ -3,6 +3,7 @@ package me.anelfer.simulation.actions.spawn;
 import me.anelfer.simulation.actions.AbstractAction;
 import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.entities.object.EmptyEntity;
+import me.anelfer.simulation.entities.сreature.HerbivoreCreature;
 import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 
@@ -25,6 +26,11 @@ public abstract class AbstractSpawnAction extends AbstractAction {
     private void spawn() {
         int maxOnMap = (int) (((double) max * (X * Y)) / 100);
         int counter = map.getEntityCount(this.getEntityClass());
+
+        if (this.getEntityClass() == HerbivoreCreature.class) {
+            System.out.println(counter);
+            System.out.println(maxOnMap);
+        }
 
         while (counter < maxOnMap) {
             seeder();

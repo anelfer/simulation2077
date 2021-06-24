@@ -46,8 +46,9 @@ public class Main extends Application {
 
         Button start = new javafx.scene.control.Button("Start");
         Button step = new javafx.scene.control.Button("Make 1 step");
+        Button reset = new javafx.scene.control.Button("Reset");
 
-        HBox hBox = new HBox(start, step);
+        HBox hBox = new HBox(start, step, reset);
         hBox.setSpacing(15);
 
         VBox.setMargin(hBox, new Insets(size, 0, 0, size));
@@ -57,30 +58,34 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
+        renderEmptyField(gc);
+
         ScheduledService<Color[][]> svc = new ScheduledService<>() {
             @Override
             protected Task<Color[][]> createTask() {
-                return task();
+                return render();
             }
         };
-        svc.setPeriod(Duration.millis(1000));
+        svc.setPeriod(Duration.millis(10));
 
         start.setOnAction(event -> {
             if (isStart) { //значит выключить
                 start.setText("Start");
                 svc.cancel();
                 step.setDisable(false);
+                reset.setDisable(false);
                 isStart = false;
             } else {
                 start.setText("Stop");
                 svc.restart();
                 step.setDisable(true);
+                reset.setDisable(true);
                 isStart = true;
             }
         });
 
         step.setOnAction(event -> {
-            val task = task();
+            val task = render();
 
             task.setOnSucceeded(event1 -> {
                 renderOnMap((Color[][]) event1.getSource().getValue(), gc);
@@ -88,16 +93,40 @@ public class Main extends Application {
             task.run();
         });
 
+        reset.setOnAction(event -> {
+            isStart = false;
+            svc.cancel();
+            renderEmptyField(gc);
+        });
+
         svc.setOnSucceeded(event -> {
             renderOnMap((Color[][]) event.getSource().getValue(), gc);
         });
     }
 
-    private Task<Color[][]> task() {
+    private void renderEmptyField(GraphicsContext gc) {
+        Task<Color[][]> firstRender = emptyFieldRender();
+
+        firstRender.setOnSucceeded(event1 -> {
+            renderOnMap((Color[][]) event1.getSource().getValue(), gc);
+        });
+        firstRender.run();
+    }
+
+    private Task<Color[][]> render() {
         return new Task<>() {
             @Override
             protected Color[][] call() {
                 return renderer.render();
+            }
+        };
+    }
+
+    private Task<Color[][]> emptyFieldRender() {
+        return new Task<>() {
+            @Override
+            protected Color[][] call() {
+                return renderer.reset();
             }
         };
     }

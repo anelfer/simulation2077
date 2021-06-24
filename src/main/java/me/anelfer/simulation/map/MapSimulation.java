@@ -60,6 +60,10 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
         return entityCount.getOrDefault(entityClass, 0);
     }
 
+    public void resetEntityCount() {
+        entityCount.clear();
+    }
+
     public boolean isCellEmpty(int x, int y) {
         return !this.containsKey(new MapLocation(x, y));
     }

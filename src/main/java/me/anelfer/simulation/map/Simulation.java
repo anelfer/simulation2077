@@ -19,7 +19,7 @@ public class Simulation {
     public static final int Y = 35;
     @Getter
     public static final int X = 35;
-    public final MapSimulation map = new MapSimulation(X, Y);
+    public MapSimulation map = new MapSimulation(X, Y);
     private final ArrayList<AbstractAction> actions = new ArrayList<>();
     @Getter
     private static int counter = 1;
@@ -44,6 +44,12 @@ public class Simulation {
         }
         counter++;
         System.out.println("Step: " + counter);
+    }
+
+    public void reset() {
+        counter = 0;
+        map.clear();
+        map.resetEntityCount();
     }
 
 }

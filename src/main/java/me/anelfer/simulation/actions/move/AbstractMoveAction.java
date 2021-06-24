@@ -1,5 +1,6 @@
 package me.anelfer.simulation.actions.move;
 
+import lombok.val;
 import me.anelfer.simulation.actions.AbstractAction;
 import me.anelfer.simulation.actions.move.pathfinding.AStarFinding;
 import me.anelfer.simulation.entities.SimulationEntity;
@@ -38,16 +39,22 @@ public abstract class AbstractMoveAction extends AbstractAction {
         entityMoveMap.forEach(((simulationEntity, location) -> {
             AStarFinding starFinding = new AStarFinding(map, simulationEntity);
             MapLocation aStarLoc = starFinding.start();
-
+            SimulationEntity lo = null;
+            if (simulationEntity.getType() == HerbivoreCreature.class) {
+                lo = map.getSimulationEntity(aStarLoc);
+                System.out.println("B: " + map.getEntityCount(lo.getType()));
+            }
             if (simulationEntity.getPreys().contains(map.getSimulationEntity(aStarLoc).getType())) {
                 map.remove(aStarLoc);
             }
 
+            if (simulationEntity.getType() == HerbivoreCreature.class) {
+                System.out.println("A: " + map.getEntityCount(lo.getType()));
+            }
+
             map.remove(location);
 
-            /*if (simulationEntity.getType() == HerbivoreCreature.class) {
-                System.out.println("COUNT: " + map.getEntityCount(HerbivoreCreature.class));
-            }*/
+
 
             simulationEntity.setLocation(aStarLoc);
             map.putEntity(aStarLoc, simulationEntity);

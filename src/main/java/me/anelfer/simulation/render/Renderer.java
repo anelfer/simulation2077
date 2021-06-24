@@ -39,4 +39,16 @@ public class Renderer {
         return grid;
     }
 
+    public Color[][] reset() {
+        simulation.reset();
+        Color[][] grid = new Color[Simulation.X][Simulation.Y];
+
+        for (int y = 0; y < Simulation.Y; y++) {
+            for (int x = 0; x < Simulation.X; x++) {
+                grid[y][x] = Color.WHITE;
+            }
+        }
+        return grid;
+    }
+
 }
