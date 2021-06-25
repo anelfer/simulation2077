@@ -98,7 +98,8 @@ public class AStarFinding {
 
     private Boolean checkNextNode(int x, int y) {
         if (0 <= x && x < map.getX() && 0 <= y && y < map.getY()) {
-            return entity.getPreys().contains(map.getSimulationEntity(x, y).getType()) || map.getSimulationEntity(x, y).getType() == EmptyEntity.class;
+            return entity.getPreys().contains(map.getSimulationEntity(x, y).getType()) || map.getSimulationEntity(x, y).getType() == EmptyEntity.class
+                    && entity.getType() != map.getSimulationEntity(x, y).getType();
         } else {
             return false;
         }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.anelfer.simulation.entities.SimulationEntity;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
 
@@ -58,6 +59,16 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
 
     public int getEntityCount(Class<?> entityClass) {
         return entityCount.getOrDefault(entityClass, 0);
+    }
+
+    public int getCountInMap(Class<?> entityClass) {
+        AtomicInteger c = new AtomicInteger();
+        this.forEach(((location, simulationEntity) -> {
+            if (simulationEntity.getType() == entityClass) {
+                c.getAndIncrement();
+            }
+        }));
+        return c.get();
     }
 
     public void resetEntityCount() {

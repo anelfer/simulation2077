@@ -8,12 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javafx.util.Duration;
-import lombok.val;
 import me.anelfer.simulation.map.Simulation;
 import me.anelfer.simulation.render.Renderer;
 
@@ -24,6 +24,7 @@ public class Main extends Application {
     private final int canvasHeight;
     private boolean isStart = false;
     private final Renderer renderer = new Renderer();
+    private final Label counterText = new Label();
 
     public Main() {
         this.size = (int) ((((float) Simulation.X / (Simulation.Y * Simulation.X))) * 500);
@@ -48,7 +49,9 @@ public class Main extends Application {
         Button step = new javafx.scene.control.Button("Make 1 step");
         Button reset = new javafx.scene.control.Button("Reset");
 
-        HBox hBox = new HBox(start, step, reset);
+        counterText.setText("Step: " + Simulation.getCounter());
+
+        HBox hBox = new HBox(start, step, reset, counterText);
         hBox.setSpacing(15);
 
         VBox.setMargin(hBox, new Insets(size, 0, 0, size));
@@ -85,11 +88,9 @@ public class Main extends Application {
         });
 
         step.setOnAction(event -> {
-            val task = render();
+            Task<Color[][]> task = render();
 
-            task.setOnSucceeded(event1 -> {
-                renderOnMap((Color[][]) event1.getSource().getValue(), gc);
-            });
+            task.setOnSucceeded(event1 -> renderOnMap((Color[][]) event1.getSource().getValue(), gc));
             task.run();
         });
 
@@ -99,17 +100,13 @@ public class Main extends Application {
             renderEmptyField(gc);
         });
 
-        svc.setOnSucceeded(event -> {
-            renderOnMap((Color[][]) event.getSource().getValue(), gc);
-        });
+        svc.setOnSucceeded(event -> renderOnMap((Color[][]) event.getSource().getValue(), gc));
     }
 
     private void renderEmptyField(GraphicsContext gc) {
         Task<Color[][]> firstRender = emptyFieldRender();
 
-        firstRender.setOnSucceeded(event1 -> {
-            renderOnMap((Color[][]) event1.getSource().getValue(), gc);
-        });
+        firstRender.setOnSucceeded(event1 -> renderOnMap((Color[][]) event1.getSource().getValue(), gc));
         firstRender.run();
     }
 
@@ -132,6 +129,8 @@ public class Main extends Application {
     }
 
     private void renderOnMap(Color[][] grid, GraphicsContext gc) {
+        counterText.setText("Step: " + Simulation.getCounter());
+
         int spacingY = 0;
 
         for (int y = 0; y < grid.length; y++) {
@@ -148,4 +147,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

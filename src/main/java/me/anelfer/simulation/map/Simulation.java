@@ -7,7 +7,7 @@ import me.anelfer.simulation.actions.move.PredatorMoveAction;
 import me.anelfer.simulation.actions.spawn.creature.HerbivoreSpawnAction;
 import me.anelfer.simulation.actions.spawn.creature.PredatorSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.EntitySpawnAction;
-import me.anelfer.simulation.actions.spawn.object.GrassSpawnAction;
+import me.anelfer.simulation.actions.spawn.creature.GrassSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.TreeSpawnAction;
 
@@ -22,7 +22,7 @@ public class Simulation {
     public MapSimulation map = new MapSimulation(X, Y);
     private final ArrayList<AbstractAction> actions = new ArrayList<>();
     @Getter
-    private static int counter = 1;
+    private static int counter = 0;
 
     public Simulation() {
         actions.add(new RockSpawnAction(10, map));
