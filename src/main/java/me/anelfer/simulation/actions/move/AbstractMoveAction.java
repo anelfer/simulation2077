@@ -1,7 +1,7 @@
 package me.anelfer.simulation.actions.move;
 
 import me.anelfer.simulation.actions.AbstractAction;
-import me.anelfer.simulation.actions.move.pathfinding.AStarFinding;
+import me.anelfer.simulation.actions.move.pathfinding.BfsPathFinder;
 import me.anelfer.simulation.entities.SimulationEntity;
 import me.anelfer.simulation.entities.object.EmptyEntity;
 import me.anelfer.simulation.entities.сreature.AbstractCreature;
@@ -15,33 +15,33 @@ import java.util.HashMap;
 public abstract class AbstractMoveAction extends AbstractAction {
 
     private final MapSimulation map;
-    private final Class<?> hunter;
+    private final Class<?> creatureType;
 
-    protected AbstractMoveAction(MapSimulation map, Class<?> hunter) {
+    protected AbstractMoveAction(MapSimulation map, Class<?> creatureType) {
         this.map = map;
-        this.hunter = hunter;
+        this.creatureType = creatureType;
     }
 
     public void move() {
-        if (Simulation.getCounter() < 2) {
+        if (Simulation.getMoveCounter() < 1) {
             return;
         }
 
         HashMap<AbstractCreature, MapLocation> entityMoveMap = new HashMap<>();
 
         for (SimulationEntity entity : map.values()) {
-            if (entity.getType() == hunter) {
+            if (entity.getType() == creatureType) {
                 entityMoveMap.put((AbstractCreature) entity, entity.getLocation());
             }
         }
 
         entityMoveMap.forEach(((simulationEntity, location) -> {
-            AStarFinding starFinding = new AStarFinding(map, simulationEntity);
-            MapLocation aStarLoc = starFinding.start();
+            BfsPathFinder bfsPathFinder = new BfsPathFinder(map, simulationEntity);
+            MapLocation aStarLoc = bfsPathFinder.start();
             SimulationEntity entity = map.getSimulationEntity(aStarLoc);
 
             if (simulationEntity.getPreys().contains(map.getSimulationEntity(aStarLoc).getType())) {
-                HP healthEntity =  ((AbstractCreature) entity).getHealth();
+                HP healthEntity = ((AbstractCreature) entity).getHealth();
                 HP healthSimulation = simulationEntity.getHealth();
                 healthEntity.takeDamage(simulationEntity.getAttack());
                 healthSimulation.heal(healthEntity.getMax() / 4);
@@ -54,14 +54,12 @@ public abstract class AbstractMoveAction extends AbstractAction {
 
             }
 
-            if (simulationEntity.getType() != entity.getType()) {
-                map.remove(location);
+            map.remove(location);
 
-                simulationEntity.setLocation(aStarLoc);
-                map.putEntity(aStarLoc, simulationEntity);
+            simulationEntity.setLocation(aStarLoc);
+            map.putEntity(aStarLoc, simulationEntity);
 
-                map.putEntity(location, new EmptyEntity(location));
-            }
+            map.putEntity(location, new EmptyEntity(location));
 
         }));
     }

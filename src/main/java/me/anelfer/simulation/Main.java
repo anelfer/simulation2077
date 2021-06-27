@@ -9,11 +9,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import javafx.util.Duration;
+import me.anelfer.simulation.actions.spawn.AbstractSpawnAction;
 import me.anelfer.simulation.map.Simulation;
 import me.anelfer.simulation.render.Renderer;
 
@@ -25,6 +28,7 @@ public class Main extends Application {
     private boolean isStart = false;
     private final Renderer renderer = new Renderer();
     private final Label counterText = new Label();
+    private final TextField seedText = new TextField();
 
     public Main() {
         this.size = (int) ((((float) Simulation.X / (Simulation.Y * Simulation.X))) * 500);
@@ -49,9 +53,17 @@ public class Main extends Application {
         Button step = new javafx.scene.control.Button("Make 1 step");
         Button reset = new javafx.scene.control.Button("Reset");
 
-        counterText.setText("Step: " + Simulation.getCounter());
+        counterText.setText("Step: " + Simulation.getMoveCounter());
+        counterText.setPadding(new Insets(0, 0, 0, 8));
 
-        HBox hBox = new HBox(start, step, reset, counterText);
+        seedText.setText("Seed: " + AbstractSpawnAction.getSeed());
+        seedText.setEditable(false);
+        seedText.setStyle("-fx-background-color: transparent; " +
+                "-fx-background-insets: 0px ;");
+        seedText.setPrefWidth(180);
+
+        VBox textBox = new VBox(counterText, seedText);
+        HBox hBox = new HBox(start, step, reset, textBox);
         hBox.setSpacing(15);
 
         VBox.setMargin(hBox, new Insets(size, 0, 0, size));
@@ -129,7 +141,7 @@ public class Main extends Application {
     }
 
     private void renderOnMap(Color[][] grid, GraphicsContext gc) {
-        counterText.setText("Step: " + Simulation.getCounter());
+        counterText.setText("Step: " + Simulation.getMoveCounter());
 
         int spacingY = 0;
 

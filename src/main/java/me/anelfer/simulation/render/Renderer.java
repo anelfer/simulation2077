@@ -9,7 +9,7 @@ public class Renderer {
     private final Simulation simulation = new Simulation();
 
     public Color[][] render() {
-        simulation.start();
+        simulation.nextTurn();
 
         Color[][] grid = new Color[Simulation.X][Simulation.Y];
 

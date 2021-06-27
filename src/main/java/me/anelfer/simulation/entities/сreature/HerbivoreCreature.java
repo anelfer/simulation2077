@@ -6,13 +6,14 @@ import java.util.List;
 
 public class HerbivoreCreature extends AbstractCreature {
 
-    public HerbivoreCreature(int speed, HP health, int attack, String gender, MapLocation location) {
-        super("herbivore", speed, health, attack, gender, location, List.of(GrassEntity.class));
+    {
+        speed = 1;
+        health = new HP(15);
+        attack = 5;
     }
 
-    @Override
-    public Class<?> getType() {
-        return this.getClass();
+    public HerbivoreCreature(String gender, MapLocation location) {
+        super("herbivore", gender, location, List.of(GrassEntity.class));
     }
 
 }

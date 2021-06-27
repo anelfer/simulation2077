@@ -9,9 +9,4 @@ public class EmptyEntity extends SimulationEntity {
         super("empty", location);
     }
 
-    @Override
-    public Class<?> getType() {
-        return this.getClass();
-    }
-
 }

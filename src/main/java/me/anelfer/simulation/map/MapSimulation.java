@@ -2,9 +2,9 @@ package me.anelfer.simulation.map;
 
 import lombok.Getter;
 import me.anelfer.simulation.entities.SimulationEntity;
+import me.anelfer.simulation.entities.object.EmptyEntity;
 
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
 
@@ -21,17 +21,15 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
     }
 
     public void putEntity(int X, int Y, SimulationEntity entity) {
-        if (entityCount.containsKey(entity.getType())) {
-            int counter = entityCount.get(entity.getType()) + 1;
-            entityCount.put(entity.getType(), counter);
-        } else {
-            entityCount.put(entity.getType(), 1);
-        }
-
-        this.put(new MapLocation(X, Y), entity);
+        putEntity(new MapLocation(X, Y), entity);
     }
 
     public void putEntity(MapLocation location, SimulationEntity entity) {
+        if (this.containsKey(location)) {
+            int count = entityCount.get(this.getSimulationEntity(location).getType()) - 1;
+            entityCount.put(this.getSimulationEntity(location).getType(), count);
+        }
+
         if (entityCount.containsKey(entity.getType())) {
             int counter = entityCount.get(entity.getType()) + 1;
             entityCount.put(entity.getType(), counter);
@@ -61,22 +59,18 @@ public class MapSimulation extends HashMap<MapLocation, SimulationEntity> {
         return entityCount.getOrDefault(entityClass, 0);
     }
 
-    public int getCountInMap(Class<?> entityClass) {
-        AtomicInteger c = new AtomicInteger();
-        this.forEach(((location, simulationEntity) -> {
-            if (simulationEntity.getType() == entityClass) {
-                c.getAndIncrement();
-            }
-        }));
-        return c.get();
-    }
-
-    public void resetEntityCount() {
+    @Override
+    public void clear() {
+        super.clear();
         entityCount.clear();
     }
 
     public boolean isCellEmpty(int x, int y) {
-        return !this.containsKey(new MapLocation(x, y));
+        if (!this.containsKey(new MapLocation(x, y))) {
+            return true;
+        } else {
+            return this.getSimulationEntity(x, y).getType() == EmptyEntity.class;
+        }
     }
 
 }

@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import me.anelfer.simulation.map.MapLocation;
 
+@Getter
+@Setter
 public abstract class SimulationEntity {
 
-    @Getter
     private final String name;
-
-    @Getter
-    @Setter
     private MapLocation location;
 
     public SimulationEntity(String name, MapLocation location) {
@@ -18,6 +16,8 @@ public abstract class SimulationEntity {
         this.location = location;
     }
 
-    public abstract Class<?> getType();
+    public Class<?> getType() {
+        return this.getClass();
+    }
 
 }

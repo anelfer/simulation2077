@@ -11,23 +11,17 @@ import java.util.List;
 @Setter
 public abstract class AbstractCreature extends SimulationEntity {
 
-    private int speed;
-    private HP health;
-    private int attack;
+    protected int speed;
+    protected HP health;
+    protected int attack;
     private final String gender;
     private final List<Class<?>> preys;
 
     public AbstractCreature(String name,
-                            int speed,
-                            HP health,
-                            int attack,
                             String gender,
                             MapLocation location,
                             List<Class<?>> preys) {
         super(name, location);
-        this.speed = speed;
-        this.health = health;
-        this.attack = attack;
         this.gender = gender;
         this.preys = preys;
     }

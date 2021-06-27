@@ -9,9 +9,4 @@ public class RockEntity extends SimulationEntity {
         super("rock", location);
     }
 
-    @Override
-    public Class<?> getType() {
-        return this.getClass();
-    }
-
 }

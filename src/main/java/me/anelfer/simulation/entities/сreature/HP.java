@@ -8,7 +8,6 @@ public class HP {
     private final int max;
     private int current;
 
-
     public HP(int max) {
         this.max = max;
         this.current = max;

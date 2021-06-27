@@ -2,17 +2,18 @@ package me.anelfer.simulation.entities.сreature;
 
 import me.anelfer.simulation.map.MapLocation;
 
-import java.util.List;
+import java.util.Collections;
 
 public class GrassEntity extends AbstractCreature {
 
-    public GrassEntity(int speed, HP health, int attack, String gender, MapLocation location) {
-        super("grass", speed, health, attack, gender, location, List.of());
+    {
+        speed = 0;
+        health = new HP(15);
+        attack = 0;
     }
 
-    @Override
-    public Class<?> getType() {
-        return this.getClass();
+    public GrassEntity(String gender, MapLocation location) {
+        super("grass", gender, location, Collections.emptyList());
     }
 
 }

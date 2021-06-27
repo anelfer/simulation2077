@@ -7,15 +7,16 @@ import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 import me.anelfer.simulation.map.Simulation;
 
-public class EntitySpawnAction extends AbstractAction {
+public class EmptyFillerAction extends AbstractAction {
 
     private final MapSimulation map;
 
-    public EntitySpawnAction(MapSimulation map) {
+    public EmptyFillerAction(MapSimulation map) {
         this.map = map;
     }
 
-    private void spawn() {
+    @Override
+    public void perform() {
         for (int y = 0; y < Simulation.Y; y++) {
             for (int x = 0; x < Simulation.X; x++) {
                 if (map.isCellEmpty(x, y)) {
@@ -29,8 +30,4 @@ public class EntitySpawnAction extends AbstractAction {
         return new EmptyEntity(location);
     }
 
-    @Override
-    public void perform() {
-        spawn();
-    }
 }
