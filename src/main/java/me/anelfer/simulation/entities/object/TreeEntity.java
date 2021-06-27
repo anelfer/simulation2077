@@ -9,9 +9,4 @@ public class TreeEntity extends SimulationEntity {
         super("tree", location);
     }
 
-    @Override
-    public Class<?> getType() {
-        return this.getClass();
-    }
-
 }
