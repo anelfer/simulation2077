@@ -8,7 +8,7 @@ public class HerbivoreCreature extends AbstractCreature {
 
     {
         speed = 1;
-        health = new HP(15);
+        health = new HP(20);
         attack = 5;
     }
 

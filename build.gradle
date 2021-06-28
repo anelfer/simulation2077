@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'application'
 }
 
 group 'org.example'
@@ -11,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.openjfx', name: 'javafx', version: '11.0.2'
+
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
@@ -24,6 +27,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+mainClassName="me.anelfer.simulation.Main"
 
 javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
