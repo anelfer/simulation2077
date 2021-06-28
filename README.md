@@ -33,6 +33,8 @@ The less hp a mob has, the lighter it is
 
 ## Run
 
+#### 1. Download jar file [*click\*](https://github.com/AlexOneTrek/simulation2077/releases)
+#### 2. Download & run source code: 
 If you have standard path for JDK use:
 
 ```gradlew run```
