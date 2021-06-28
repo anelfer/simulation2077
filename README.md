@@ -7,7 +7,7 @@ Simulation of a simple world with predators and herbivores
 
 ### Screenshot
 
-![](https://media.giphy.com/media/x5U7m5RSlwAIxkOLgb/giphy.gif)
+![](https://media.giphy.com/media/q0y6kNYgsR2pAQGwwV/giphy.gif)
 
 - ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) - Predators
 - ![#800080](https://via.placeholder.com/15/800080/000000?text=+) - Herbivore
