@@ -11,8 +11,12 @@ import me.anelfer.simulation.actions.spawn.creature.PredatorSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.EmptyFillerAction;
 import me.anelfer.simulation.actions.spawn.object.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.TreeSpawnAction;
+import me.anelfer.simulation.actions.starve.PredatorStarveAction;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 
 public class Simulation {
@@ -21,26 +25,46 @@ public class Simulation {
     public static final int Y = 35;
     @Getter
     public static final int X = 35;
-    public MapSimulation map = new MapSimulation(X, Y);
-    private final ArrayList<AbstractAction> actions = new ArrayList<>();
     @Getter
     private static int moveCounter = 0;
+    @Getter
+    private final MapSimulation map = new MapSimulation(X, Y);
+    private final ArrayList<AbstractAction> actions = new ArrayList<>();
+    private final ArrayList<AbstractAction> initActions = new ArrayList<>();
+    @Getter
+    private static final Properties property = new Properties();
 
     public Simulation() {
-        actions.add(new RockSpawnAction(10, map));
+        initActions.add(new RockSpawnAction(10, map));
+        initActions.add(new TreeSpawnAction(10, map));
+        initActions.add(new PredatorSpawnAction(5, map));
+        initActions.add(new HerbivoreSpawnAction(10, map));
+
         actions.add(new GrassSpawnAction(10, map));
-        actions.add(new TreeSpawnAction(10, map));
-
-        actions.add(new PredatorSpawnAction(5, map));
-        actions.add(new HerbivoreSpawnAction(10, map));
-
         actions.add(new EmptyFillerAction(map));
+
+        actions.add(new PredatorStarveAction(map));
 
         actions.add(new PredatorMoveAction(map));
         actions.add(new HerbivoreMoveAction(map));
+
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream("src/main/resources/config.properties");
+            property.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void nextTurn() {
+
+        if (moveCounter < 1) {
+            for (AbstractAction initAction : initActions) {
+                initAction.perform();
+            }
+        }
+
         for (AbstractAction action : actions) {
             action.perform();
         }

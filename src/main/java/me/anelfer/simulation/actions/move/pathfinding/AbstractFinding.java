@@ -26,7 +26,7 @@ public abstract class AbstractFinding {
 
     public abstract void finding();
 
-    public MapLocation start() {
+    public MapLocation getDestination() {
         for (MapLocation location : map.keySet()) {
             List<MapLocation> locList = new ArrayList<>(getNextNode(location.getX(), location.getY()));
             graph.put(location, locList);

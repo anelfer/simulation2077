@@ -2,6 +2,7 @@ package me.anelfer.simulation.render;
 
 import javafx.scene.paint.Color;
 import me.anelfer.simulation.entities.сreature.AbstractCreature;
+import me.anelfer.simulation.map.MapSimulation;
 import me.anelfer.simulation.map.Simulation;
 
 public class Renderer {
@@ -10,16 +11,15 @@ public class Renderer {
 
     public Color[][] render() {
         simulation.nextTurn();
+        MapSimulation map = simulation.getMap();
 
         Color[][] grid = new Color[Simulation.X][Simulation.Y];
 
         for (int y = 0; y < Simulation.Y; y++) {
             for (int x = 0; x < Simulation.X; x++) {
-                switch (simulation.map.getSimulationEntity(x, y).getName()) {
+                switch (map.getSimulationEntity(x, y).getName()) {
                     case "grass":
-                        AbstractCreature entityG = (AbstractCreature) simulation.map.getSimulationEntity(x, y);
-                        float alphaG =  ((float) entityG.getHealth().getCurrent() / (float) entityG.getHealth().getMax());
-                        grid[y][x] = Color.color(0.0f, 0.5019608f, 0.0f, alphaG);
+                        grid[y][x] = Color.color(0.0f, 0.5019608f, 0.0f, getAlpha((AbstractCreature) map.getSimulationEntity(x, y)));
                         break;
                     case "rock":
                         grid[y][x] = Color.GREY;
@@ -28,12 +28,10 @@ public class Renderer {
                         grid[y][x] = Color.web("#964B00");
                         break;
                     case "herbivore":
-                        AbstractCreature entityH = (AbstractCreature) simulation.map.getSimulationEntity(x, y);
-                        float alphaH =  ((float) entityH.getHealth().getCurrent() / (float) entityH.getHealth().getMax());
-                        grid[y][x] = Color.color(0.5019608f, 0.0f, 0.5019608f, alphaH);
+                        grid[y][x] = Color.color(0.5019608f, 0.0f, 0.5019608f, getAlpha((AbstractCreature) map.getSimulationEntity(x, y)));
                         break;
                     case "predator":
-                        grid[y][x] = Color.RED;
+                        grid[y][x] = Color.color(1.0f, 0.0f, 0.0f, getAlpha((AbstractCreature) map.getSimulationEntity(x, y)));
                         break;
                     case "empty":
                         grid[y][x] = Color.WHITE;
@@ -54,6 +52,10 @@ public class Renderer {
             }
         }
         return grid;
+    }
+
+    private float getAlpha(AbstractCreature entity) {
+        return ((float) entity.getHealth().getCurrent() / (float) entity.getHealth().getMax());
     }
 
 }

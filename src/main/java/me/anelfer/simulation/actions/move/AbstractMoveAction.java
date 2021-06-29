@@ -10,7 +10,11 @@ import me.anelfer.simulation.map.MapLocation;
 import me.anelfer.simulation.map.MapSimulation;
 import me.anelfer.simulation.map.Simulation;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 
 public abstract class AbstractMoveAction extends AbstractAction {
 
@@ -22,7 +26,8 @@ public abstract class AbstractMoveAction extends AbstractAction {
         this.creatureType = creatureType;
     }
 
-    public void move() {
+    @Override
+    public void perform() {
         if (Simulation.getMoveCounter() < 1) {
             return;
         }
@@ -35,38 +40,35 @@ public abstract class AbstractMoveAction extends AbstractAction {
             }
         }
 
-        entityMoveMap.forEach(((simulationEntity, location) -> {
-            BfsPathFinder bfsPathFinder = new BfsPathFinder(map, simulationEntity);
-            MapLocation aStarLoc = bfsPathFinder.start();
-            SimulationEntity entity = map.getSimulationEntity(aStarLoc);
+        entityMoveMap.forEach(((entity, previousLocation) -> {
+            BfsPathFinder finding = new BfsPathFinder(map, entity);
+            MapLocation newLocation = finding.getDestination();
 
-            if (simulationEntity.getPreys().contains(map.getSimulationEntity(aStarLoc).getType())) {
-                HP healthEntity = ((AbstractCreature) entity).getHealth();
-                HP healthSimulation = simulationEntity.getHealth();
-                healthEntity.takeDamage(simulationEntity.getAttack());
-                healthSimulation.heal(healthEntity.getMax() / 4);
+            SimulationEntity prey = map.getSimulationEntity(newLocation);
 
-                if (healthEntity.getCurrent() == 0) {
-                    map.remove(aStarLoc);
+            if (entity.getPreys().contains(map.getSimulationEntity(newLocation).getType())) {
+                HP preyHP = ((AbstractCreature) prey).getHealth();
+                HP healthSimulation = entity.getHealth();
+
+                preyHP.takeDamage(entity.getAttack());
+                healthSimulation.heal(preyHP.getMax() / Integer.parseInt(Simulation.getProperty().getProperty("hp.heal")));
+
+                if (preyHP.getCurrent() == 0) {
+                    map.remove(newLocation);
                 } else {
                     return;
                 }
 
             }
 
-            map.remove(location);
+            map.remove(previousLocation);
 
-            simulationEntity.setLocation(aStarLoc);
-            map.putEntity(aStarLoc, simulationEntity);
+            entity.setLocation(newLocation);
+            map.putEntity(newLocation, entity);
 
-            map.putEntity(location, new EmptyEntity(location));
+            map.putEntity(previousLocation, new EmptyEntity(previousLocation));
 
         }));
-    }
-
-    @Override
-    public void perform() {
-        move();
     }
 
 }
