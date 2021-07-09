@@ -13,8 +13,8 @@ import me.anelfer.simulation.actions.spawn.object.RockSpawnAction;
 import me.anelfer.simulation.actions.spawn.object.TreeSpawnAction;
 import me.anelfer.simulation.actions.starve.PredatorStarveAction;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -48,9 +48,10 @@ public class Simulation {
         actions.add(new PredatorMoveAction(map));
         actions.add(new HerbivoreMoveAction(map));
 
-        FileInputStream fis;
+
+        InputStream fis;
         try {
-            fis = new FileInputStream("src/main/resources/config.properties");
+            fis = getClass().getClassLoader().getResourceAsStream("config.properties");
             property.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
